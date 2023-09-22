@@ -8,9 +8,9 @@ import kotlinx.coroutines.flow.flowOn
 import java.io.IOException
 
 class ImageRepositoryImpl : ImageRepository {
-    override fun getImageList(query : String, sort : String): Flow<ApiState<ImageSearchResponse>> = flow {
+    override fun getImageList(query : String, sort : String, page : Int): Flow<ApiState<ImageSearchResponse>> = flow {
         try {
-            val response = RetrofitInstance.api.searchImage(query = query, sort = sort, page = 1, size = 5)
+            val response = RetrofitInstance.api.searchImage(query = query, sort = sort, page = page, size = 10)
 
             if (response.isSuccessful) {
                 response.body()?.let {

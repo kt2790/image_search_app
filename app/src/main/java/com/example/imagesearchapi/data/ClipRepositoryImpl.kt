@@ -6,10 +6,10 @@ import kotlinx.coroutines.flow.flow
 import java.io.IOException
 
 class ClipRepositoryImpl : ClipRepository {
-    override fun getClipList(query: String, sort: String): Flow<ApiState<ClipSearchResponse>> =
+    override fun getClipList(query: String, sort: String, page: Int): Flow<ApiState<ClipSearchResponse>> =
         flow {
             try {
-                val response = RetrofitInstance.api.searchClip(query = query, sort = sort, page = 1, size = 5)
+                val response = RetrofitInstance.api.searchClip(query = query, sort = sort, page = page, size = 10)
 
                 if (response.isSuccessful) {
                     response.body()?.let {
@@ -19,11 +19,12 @@ class ClipRepositoryImpl : ClipRepository {
                     try {
                         emit(ApiState.Error(response.errorBody()!!.string()))
                     } catch (e: IOException) {
+                        emit(ApiState.Error("Unknown Error"))
                         e.printStackTrace()
                     }
                 }
             } catch (e: Exception) {
                 emit(ApiState.Error(e.message ?: ""))
-            } as Unit
+            }
         }
 }

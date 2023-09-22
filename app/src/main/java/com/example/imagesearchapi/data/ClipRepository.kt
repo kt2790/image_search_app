@@ -4,5 +4,5 @@ import com.example.imagesearchapi.model.ClipSearchResponse
 import kotlinx.coroutines.flow.Flow
 
 interface ClipRepository {
-    fun getClipList(query: String, sort: String) : Flow<ApiState<ClipSearchResponse>>
+    fun getClipList(query: String, sort: String, page: Int) : Flow<ApiState<ClipSearchResponse>>
 }

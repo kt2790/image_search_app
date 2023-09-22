@@ -21,8 +21,9 @@ class SearchListAdapter (private val addToBookmarkList : (PresModel) -> Unit) : 
 
     fun setList(imageList : MutableList<PresModel>) {
         this.imageList = imageList
-        notifyDataSetChanged()
+        notifyItemRangeChanged(0, this.imageList.size)
     }
+
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(SearchItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)).apply {
