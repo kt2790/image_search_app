@@ -2,8 +2,10 @@ package com.example.imagesearchapi.ui.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.example.imagesearchapi.R
 import com.example.imagesearchapi.databinding.SearchItemBinding
 import com.example.imagesearchapi.model.PresModel
 
@@ -13,7 +15,10 @@ class SearchListAdapter (private val addToBookmarkList : (PresModel) -> Unit) : 
 
     class ViewHolder (val binding : SearchItemBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(search: PresModel) {
-            Glide.with(binding.root.context).load(search.image_url).into(binding.imageView)
+            Glide.with(binding.root.context)
+                .load(search.image_url)
+                .placeholder(binding.root.resources.getIdentifier("symbol_questionmark", "drawable", binding.root.context.packageName))
+                .into(binding.imageView)
             binding.searchItemTitle.text = search.sitename
             binding.searchItemDate.text = search.datetime
         }
@@ -29,6 +34,7 @@ class SearchListAdapter (private val addToBookmarkList : (PresModel) -> Unit) : 
         return ViewHolder(SearchItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)).apply {
             binding.imageView.setOnLongClickListener {
                 addToBookmarkList(imageList[adapterPosition])
+                Toast.makeText(binding.root.context, binding.root.context.getString(R.string.BOOKMARK_ADD_TEXT), Toast.LENGTH_SHORT).show()
                 true
             }
         }

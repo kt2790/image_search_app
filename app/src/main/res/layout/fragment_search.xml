@@ -6,23 +6,40 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <EditText
-        android:id="@+id/search_text"
-        android:layout_width="250dp"
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/edittext_card"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="text"
-        android:text="Name"
+        android:layout_margin="10dp"
+        app:cardCornerRadius="10dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:strokeColor="#CCCCCC"
+        app:strokeWidth="1dp">
+
+        <EditText
+            android:id="@+id/search_text"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:background="@null"
+            android:ems="10"
+            android:inputType="text"
+            android:hint="검색어를 입력해주세요."
+            android:autofillHints="검색어를 입력해주세요."
+            android:text=""
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </com.google.android.material.card.MaterialCardView>
 
     <Button
         android:id="@+id/confirm_btn"
-        android:layout_width="0dp"
+        android:layout_width="80dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="7dp"
         android:text="검색"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/search_text"
+        app:layout_constraintStart_toEndOf="@+id/edittext_card"
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.recyclerview.widget.RecyclerView
@@ -34,7 +51,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/search_text" />
+        app:layout_constraintTop_toBottomOf="@+id/edittext_card" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

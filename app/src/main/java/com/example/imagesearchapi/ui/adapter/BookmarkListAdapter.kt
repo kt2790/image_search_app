@@ -2,8 +2,10 @@ package com.example.imagesearchapi.ui.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.example.imagesearchapi.R
 import com.example.imagesearchapi.databinding.BookmarkItemBinding
 import com.example.imagesearchapi.model.PresModel
 
@@ -13,7 +15,10 @@ class BookmarkListAdapter (private val deleteBookmark : (PresModel) -> Unit) : R
 
     class ViewHolder(val binding: BookmarkItemBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(search: PresModel) {
-            Glide.with(binding.root.context).load(search.image_url).into(binding.bookmarkImageview)
+            Glide.with(binding.root.context)
+                .load(search.image_url)
+                .placeholder(binding.root.resources.getIdentifier("symbol_questionmark", "drawable", binding.root.context.packageName))
+                .into(binding.bookmarkImageview)
             binding.bookmarkItemTitle.text = search.sitename
             binding.bookmarkItemDate.text = search.datetime
         }
@@ -34,6 +39,7 @@ class BookmarkListAdapter (private val deleteBookmark : (PresModel) -> Unit) : R
         ).apply {
             binding.bookmarkImageview.setOnLongClickListener {
                 deleteBookmark(imageList[adapterPosition])
+                Toast.makeText(binding.root.context, binding.root.context.getString(R.string.BOOKMARK_DELETE_TEXT), Toast.LENGTH_SHORT).show()
                 true
             }
         }

@@ -11,6 +11,6 @@ data class KakaoImage(
 )
 
 fun KakaoImage.asPresModel(kakaoImage: KakaoImage) =
-    PresModel("[Image] " + kakaoImage.sitename, kakaoImage.image_url, kakaoImage.datetime)
+    PresModel("[Image] " + kakaoImage.sitename, kakaoImage.image_url, kakaoImage.datetime.substring(0 until 10))
 
 
