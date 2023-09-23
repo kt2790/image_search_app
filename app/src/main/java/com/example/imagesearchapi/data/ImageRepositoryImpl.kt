@@ -20,11 +20,12 @@ class ImageRepositoryImpl : ImageRepository {
                 try {
                     emit(ApiState.Error(response.errorBody()!!.string()))
                 } catch (e: IOException) {
+                    emit(ApiState.Error("IO Error"))
                     e.printStackTrace()
                 }
             }
         } catch (e: Exception) {
             emit(ApiState.Error(e.message ?: ""))
-        } as Unit
+        }
     }
 }

@@ -19,7 +19,7 @@ class ClipRepositoryImpl : ClipRepository {
                     try {
                         emit(ApiState.Error(response.errorBody()!!.string()))
                     } catch (e: IOException) {
-                        emit(ApiState.Error("Unknown Error"))
+                        emit(ApiState.Error("IO Error"))
                         e.printStackTrace()
                     }
                 }

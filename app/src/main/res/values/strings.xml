@@ -2,6 +2,6 @@
     <string name="app_name">ImageSearchApi</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="BOOKMARK_DELETE_TEXT">북마크에서 제거하였습니다.</string>
-    <string name="BOOKMARK_ADD_TEXT">북마크에 등록하였습니다.</string>
+    <string name="BOOKMARK_DELETE_TEXT">보관함에서 제거하였습니다.</string>
+    <string name="BOOKMARK_ADD_TEXT">보관함에 등록하였습니다.</string>
 </resources>
