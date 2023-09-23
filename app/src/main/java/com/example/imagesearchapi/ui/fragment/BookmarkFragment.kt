@@ -12,7 +12,10 @@ import com.example.imagesearchapi.ui.adapter.BookmarkListAdapter
 
 class BookmarkFragment : Fragment() {
 
-    private lateinit var binding : FragmentBookmarkBinding
+    private var _binding : FragmentBookmarkBinding? = null
+    private val binding : FragmentBookmarkBinding
+        get() = _binding!!
+
     private val viewModel: ContentViewModel by activityViewModels { ContentViewModelFactory()}
     private val adapter by lazy {
         BookmarkListAdapter {
@@ -24,7 +27,7 @@ class BookmarkFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentBookmarkBinding.inflate(inflater, container, false)
+        _binding = FragmentBookmarkBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -40,5 +43,10 @@ class BookmarkFragment : Fragment() {
         viewModel.bookmarkList.observe(viewLifecycleOwner) {
             adapter.setList(it.toMutableList())
         }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }

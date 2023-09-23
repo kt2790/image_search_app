@@ -17,7 +17,10 @@ import com.example.imagesearchapi.ui.adapter.SearchListAdapter
 
 class SearchFragment : Fragment() {
 
-    private lateinit var binding : FragmentSearchBinding
+    private var _binding : FragmentSearchBinding? = null
+    private val binding: FragmentSearchBinding
+        get() = _binding!!
+
     private val viewModel: ContentViewModel by activityViewModels { ContentViewModelFactory() }
     private lateinit var recyclerViewState : Parcelable
     private val adapter by lazy {
@@ -30,7 +33,7 @@ class SearchFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentSearchBinding.inflate(inflater, container, false)
+        _binding = FragmentSearchBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -73,6 +76,11 @@ class SearchFragment : Fragment() {
                 is UiState.Error -> {}
             }
         }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 
 }
