@@ -6,7 +6,8 @@
 
 Kakao REST API 를 활용하여 이미지, 영상 검색 
 
-![resize](https://github.com/kt2790/mvvm_carrot/assets/138543028/159d9aea-59f9-48a5-a993-c2aef23ccf39)
+![run](https://github.com/kt2790/image_search_app/assets/138543028/458716e0-698c-45a1-a01f-15d5385b995c)
+
 
 # ⭐️ Key Function
 
@@ -29,6 +30,6 @@ Kakao REST API 를 활용하여 이미지, 영상 검색
 
 # 🤔 Learned
 
-- `Retrofit` 라이브러리를 통해 안드로이드에서 HTTP 통신 하는 방법에 대해 알 수 있었음. 
+- `Retrofit` 라이브러리를 통해 안드로이드에서의 HTTP 통신을 구현해 볼 수 있었음.
 - **MVVM** 패턴을 도입해, 기존의 **MVC**, **MVP** 아키텍처의 문제점을 개선시켜 볼 수 있었음.
 - **Coroutine**, **LiveData**, **Flow** 를 사용해보면서, 비동기 프로그래밍에 대한 전반적인 이해를 다질 수 있었음.
