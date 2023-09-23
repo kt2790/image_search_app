@@ -6,8 +6,7 @@
 
 Kakao REST API 를 활용하여 이미지, 영상 검색 
 
-![run](https://github.com/kt2790/image_search_app/assets/138543028/458716e0-698c-45a1-a01f-15d5385b995c)
-
+![run](https://github.com/kt2790/image_search_app/assets/138543028/c9dfb645-0096-4cb8-8639-ae24aa2fc693)
 
 # ⭐️ Key Function
 
