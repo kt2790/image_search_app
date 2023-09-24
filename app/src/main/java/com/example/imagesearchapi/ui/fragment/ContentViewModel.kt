@@ -3,6 +3,7 @@ package com.example.imagesearchapi.ui.fragment
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
 import com.example.imagesearchapi.data.BookmarkRepository
 import com.example.imagesearchapi.data.ClipRepository
@@ -24,7 +25,9 @@ class ContentViewModel (private val imageRepository : ImageRepository, private v
     val searchResult : LiveData<UiState<List<PresModel>>>
         get() = _searchResult
 
-    private val _bookmarkList = MutableLiveData<List<PresModel>>()
+    private val _bookmarkList by lazy {
+        bookmarkRepository.getBookmarkList().asLiveData()
+    }
     val bookmarkList : LiveData<List<PresModel>>
         get() = _bookmarkList
 
@@ -32,10 +35,6 @@ class ContentViewModel (private val imageRepository : ImageRepository, private v
     private var curList : MutableList<PresModel>? = mutableListOf()
     private var currentQuery = ""
     private var currentSort = ""
-
-    init {
-        getBookmarkListPref()
-    }
 
     fun getContentList(query: String, sort: String) {
         page = 1
@@ -81,32 +80,15 @@ class ContentViewModel (private val imageRepository : ImageRepository, private v
         }
     }
 
-
-    private fun getBookmarkListPref() {
-        viewModelScope.launch {
-            bookmarkRepository.getBookmarkListPref().collect {
-                _bookmarkList.value = it
-            }
-        }
-    }
-
     fun addBookmarkPref(value: PresModel) {
         viewModelScope.launch {
             bookmarkRepository.addBookmarkPref(value)
-            bookmarkRepository.getBookmarkListPref().collect {
-                _bookmarkList.value = it
-            }
         }
     }
 
     fun deleteBookmarkPref(value: PresModel) {
         viewModelScope.launch {
             bookmarkRepository.deleteBookmarkPref(value)
-            bookmarkRepository.getBookmarkListPref().collect {
-                _bookmarkList.value = it
-            }
         }
     }
-
-
 }

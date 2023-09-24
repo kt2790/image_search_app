@@ -10,8 +10,8 @@ class BookmarkRepositoryImpl : BookmarkRepository {
         sharedPrefInstance.setBookmarkListPref(values)
     }
 
-    override fun getBookmarkListPref() : Flow<List<PresModel>> {
-        return sharedPrefInstance.getBookmarkListPref()
+    override fun getBookmarkList(): Flow<List<PresModel>> {
+        return sharedPrefInstance.getBookmarkList()
     }
 
     override suspend fun addBookmarkPref(value: PresModel) {

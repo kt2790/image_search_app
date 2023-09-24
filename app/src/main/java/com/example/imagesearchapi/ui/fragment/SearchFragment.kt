@@ -1,7 +1,6 @@
 package com.example.imagesearchapi.ui.fragment
 
 import android.os.Bundle
-import android.os.Parcelable
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -9,9 +8,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.imagesearchapi.data.ApiState
 import com.example.imagesearchapi.databinding.FragmentSearchBinding
-import com.example.imagesearchapi.model.ImageSearchResponse
 import com.example.imagesearchapi.ui.adapter.SearchListAdapter
 
 
@@ -22,7 +19,6 @@ class SearchFragment : Fragment() {
         get() = _binding!!
 
     private val viewModel: ContentViewModel by activityViewModels { ContentViewModelFactory() }
-    private lateinit var recyclerViewState : Parcelable
     private val adapter by lazy {
         SearchListAdapter {
             viewModel.addBookmarkPref(it)

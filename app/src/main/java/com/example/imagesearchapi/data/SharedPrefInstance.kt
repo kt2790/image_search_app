@@ -2,11 +2,16 @@ package com.example.imagesearchapi.data
 
 import android.content.Context
 import android.content.SharedPreferences
+import android.util.Log
 import com.example.imagesearchapi.MyApplication
 import com.example.imagesearchapi.model.PresModel
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.channels.Channel
+import kotlinx.coroutines.channels.awaitClose
+import kotlinx.coroutines.flow.buffer
+import kotlinx.coroutines.flow.callbackFlow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.withContext
@@ -54,13 +59,26 @@ class SharedPrefInstance private constructor() {
         }
     }
 
-    fun getBookmarkListPref() = flow {
+    fun getBookmarkList() = callbackFlow {
+        val listener = SharedPreferences.OnSharedPreferenceChangeListener { sharedPreferences, key ->
+            val json = sharedPreferences.getString(key, null)
+            val gson = Gson()
+
+            val storedData : List<PresModel> = gson.fromJson(json, object : TypeToken<List<PresModel>?>() {}.type) ?: mutableListOf()
+            trySend(storedData)
+        }
+        prefs.registerOnSharedPreferenceChangeListener(listener)
+
         val json = prefs.getString(PREF_KEY, null)
         val gson = Gson()
 
         val storedData : List<PresModel> = gson.fromJson(json, object : TypeToken<List<PresModel>?>() {}.type) ?: mutableListOf()
-        emit(storedData)
-    }.flowOn(Dispatchers.IO)
+        send(storedData)
+
+        awaitClose {
+            prefs.unregisterOnSharedPreferenceChangeListener(listener)
+        }
+    }.flowOn(Dispatchers.IO).buffer(Channel.UNLIMITED)
 
     companion object {
         private const val PREF_KEY = "BOOKMARK"

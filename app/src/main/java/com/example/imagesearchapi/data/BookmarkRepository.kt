@@ -6,7 +6,7 @@ import kotlinx.coroutines.flow.Flow
 interface BookmarkRepository {
     suspend fun setBookmarkListPref(values: List<PresModel>)
 
-    fun getBookmarkListPref() : Flow<List<PresModel>>
+    fun getBookmarkList() : Flow<List<PresModel>>
 
     suspend fun addBookmarkPref(value: PresModel)
 
